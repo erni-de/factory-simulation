@@ -1,0 +1,7 @@
+out/
+*.o
+*.so
+*.dll
+*.exe
+*.oppfeaturestate
+*.lck
