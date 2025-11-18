@@ -23,6 +23,6 @@ moduleinterface AssemblyLine
     parameters:
         int N;
     gates:
-        input in;
+        input in[N];
         output out;
 }

@@ -17,6 +17,7 @@
 // TODO generated message class
 //
 packet Item {
+    int counter = 0;
     bool isDiscarded = false; //Is item discarded?
     double generationTime = -1.0; //Time at which item is generated
     double arrivalTime = -1.0; //Time at which item arrives at factory (is stored in input array)

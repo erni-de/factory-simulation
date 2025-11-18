@@ -21,18 +21,20 @@ package factory_sim;
 module PipelinedAssemblyLine like AssemblyLine
 {
     parameters:
-        int N;
+        int N = default(0);
     gates:
-        input in;
+        input in[N];
         output out;
     submodules:
         robot[N]: Robot;
     connections:
-        in --> robot[0].in;
-
-        for i=0..N-2 {
-            robot[i].out --> robot[i+1].in; //connect stage[i] --> stage[i+1]
+        for i=0..N-1 {
+        	in[i] --> robot[0].instart;
         }
 
-        robot[N-1].out --> out; //connect last stage to compound output
+        for i=0..N-2 {
+            robot[i].out_internal --> robot[i+1].in_internal; //connect stage[i] --> stage[i+1]
+        }
+
+        robot[N-1].outend --> out; //connect last stage to compound output
 }

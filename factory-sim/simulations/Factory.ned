@@ -24,12 +24,17 @@ import factory_sim.ItemReceiver;
 //
 network Factory
 {
+    parameters:
+        int N = default(0);
+        string p = default("");
     submodules:
         generator: ItemGenerator;
         assemblyLine: <default("PipelinedAssemblyLine")> like AssemblyLine;
-        receiver: ItemReceiver;
+        receiver: ItemReceiver ;
     connections:
-        generator.out --> assemblyLine.in;
+        for i=0..N-1 {
+        	generator.out[i] --> assemblyLine.in[i];
+        }
         assemblyLine.out --> receiver.in;
 
 }

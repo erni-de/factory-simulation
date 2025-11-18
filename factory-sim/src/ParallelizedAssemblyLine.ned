@@ -21,16 +21,17 @@ package factory_sim;
 module ParallelizedAssemblyLine like AssemblyLine
 {
     parameters:
-        int N;
+        int N = default(0);
     gates:
-        input in;
+        input in[N];
         output out;
     submodules:
         robot[N]: Robot;
     connections:
         // connect each submodule to compound gates
         for i=0..N-1 {
-            in --> robot[i].in;
-            robot[i].out --> out;
+            in[i] --> robot[i].instart;
+            robot[i].out_internal --> robot[i].in_internal;
+            robot[i].outend --> out;
         }
 }

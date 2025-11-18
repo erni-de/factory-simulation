@@ -21,6 +21,8 @@ package factory_sim;
 simple Robot
 {
     gates:
-        input in;
-        output out;
+        input instart; //instart, outend used for communicating with assembly line endpoints
+        output outend;
+        input in_internal; //in_internal, out_internal used in the middle of production process
+        output out_internal;
 }

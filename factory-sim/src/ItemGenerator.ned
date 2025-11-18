@@ -20,6 +20,8 @@ package factory_sim;
 //
 simple ItemGenerator
 {
+    parameters:
+        int N = default(0);
     gates:
-        output out;
+        output out[N];
 }
