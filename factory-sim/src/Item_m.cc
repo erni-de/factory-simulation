@@ -205,6 +205,10 @@ void Item::parsimUnpack(omnetpp::cCommBuffer *b)
     doParsimUnpacking(b,this->productionTime);
 }
 
+void Item::increaseCounter(){
+    this->counter = this->counter + 1;
+}
+
 int Item::getCounter() const
 {
     return this->counter;
@@ -213,10 +217,6 @@ int Item::getCounter() const
 void Item::setCounter(int counter)
 {
     this->counter = counter;
-}
-
-void Item::increaseCounter(){
-    this->counter = this->counter + 1;
 }
 
 bool Item::isDiscarded() const

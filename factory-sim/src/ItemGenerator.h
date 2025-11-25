@@ -12,11 +12,15 @@
 #include "Item_m.h"
 
 using namespace omnetpp;
-using namespace std;
+
 
 class ItemGenerator : public cSimpleModule
 {
-
+    protected:
+        virtual void initialize() override;
+        virtual void handleMessage(cMessage *msg) override;
+        void sendItems();
 };
+
 
 #endif /* ITEMGENERATOR_H_ */

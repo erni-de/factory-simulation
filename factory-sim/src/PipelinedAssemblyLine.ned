@@ -30,11 +30,10 @@ module PipelinedAssemblyLine like AssemblyLine
     connections:
         for i=0..N-1 {
         	in[i] --> robot[0].instart;
+        	robot[i].outend --> out; //every robot can send directly to out (used to manage discarded items)
         }
 
         for i=0..N-2 {
             robot[i].out_internal --> robot[i+1].in_internal; //connect stage[i] --> stage[i+1]
         }
-
-        robot[N-1].outend --> out; //connect last stage to compound output
 }

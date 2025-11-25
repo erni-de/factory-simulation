@@ -29,14 +29,22 @@ void Robot::handleMessage(cMessage *msg){
             item->increaseCounter();
             if (counterValue == N) //handle last stage
             {
+                item->setProductionTime(simTime().dbl());
                 send(item, "outend");
             } else {               //handle midst of process
                 send(item, "out_internal");
             }
+        } else {
+            item->setIsDiscarded(true); //item is discarded
+            send(item, "outend"); //sent directly to receiver for registration
         }
     } else {
+        Item *item = check_and_cast<Item*>(msg); //casts generic cMessage into Item_m
+        if (item->getCounter() == 0){
+            item->setStartTime(simTime().dbl());
+        }
         double t = uniform(0,1); //change it to make it parameterizable
-        scheduleAt(simTime() + t, msg);
+        scheduleAt(simTime() + t, item);
     }
 }
 

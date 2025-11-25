@@ -15,8 +15,8 @@
 
 package factory_sim.simulations;
 
-import factory_sim.ItemGenerator;
 import factory_sim.AssemblyLine;
+import factory_sim.ItemGenerator;
 import factory_sim.ItemReceiver;
 
 //
@@ -27,13 +27,18 @@ network Factory
     parameters:
         int N = default(0);
         string p = default("");
+        @display("bgb=367,332");
     submodules:
-        generator: ItemGenerator;
-        assemblyLine: <default("PipelinedAssemblyLine")> like AssemblyLine;
-        receiver: ItemReceiver ;
+        assemblyLine: <default("PipelinedAssemblyLine")> like AssemblyLine{
+            @display("p=151,158;is=vl");
+        }
+        generator: ItemGenerator{
+            @display("p=266,245;is=vl");
+        }
+        receiver: ItemReceiver;
     connections:
         for i=0..N-1 {
-        	generator.out[i] --> assemblyLine.in[i];
+            generator.out[i] --> assemblyLine.in[i];
         }
         assemblyLine.out --> receiver.in;
 

@@ -14,7 +14,6 @@
 //
 
 package factory_sim;
-
 //
 // TODO auto-generated type
 //

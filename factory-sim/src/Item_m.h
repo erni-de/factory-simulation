@@ -59,9 +59,10 @@ class Item : public ::omnetpp::cPacket
     virtual void parsimPack(omnetpp::cCommBuffer *b) const override;
     virtual void parsimUnpack(omnetpp::cCommBuffer *b) override;
 
+    virtual void increaseCounter();
+
     virtual int getCounter() const;
     virtual void setCounter(int counter);
-    virtual void increaseCounter();
 
     virtual bool isDiscarded() const;
     virtual void setIsDiscarded(bool isDiscarded);

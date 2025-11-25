@@ -13,10 +13,15 @@
 #include "Item_m.h"
 
 using namespace omnetpp;
-using namespace std;
+
 
 class ItemReceiver : public cSimpleModule
 {
+protected:
+    virtual void initialize() override;
+    virtual void handleMessage(cMessage *) override;
+    virtual void finish() override;
 };
+
 
 #endif /* ITEMRECEIVER_H_ */
