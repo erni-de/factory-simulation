@@ -20,15 +20,15 @@ void ItemReceiver::initialize(){
             EV_INFO << "Error opening CSV file!\n";
         } else {
             EV_INFO << "CSV file opened successfully.\n";
-            csvFile << "counter,discarded,gen_time,arrival_time,start_time,prod_time\n";  // CSV header
+            csvFile << "counter,discarded,gen_time,arrival_time,discard_time,prod_time\n";  // CSV header
     }
 }
 
 void ItemReceiver::handleMessage(cMessage *msg){
     Item *item = check_and_cast<Item*>(msg); //casts generic cMessage into Item_m
-
+    EV_INFO << "Item arrived!";
         // Write data
-    csvFile << item->getCounter() << "," << item->isDiscarded() << "," << item->getGenerationTime() << "," << item->getArrivalTime() << "," << item->getStartTime() << ","  << item->getProductionTime() << "\n";
+    csvFile << item->getCounter() << "," << item->isDiscarded() << "," << item->getGenerationTime() << "," << item->getStartTime() << ","  << item->getDiscardTime()  << ","  << item->getProductionTime() << "\n";
 
 }
 

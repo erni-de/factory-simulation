@@ -178,8 +178,8 @@ void Item::copy(const Item& other)
     this->counter = other.counter;
     this->isDiscarded_ = other.isDiscarded_;
     this->generationTime = other.generationTime;
-    this->arrivalTime = other.arrivalTime;
     this->startTime = other.startTime;
+    this->discardTime = other.discardTime;
     this->productionTime = other.productionTime;
 }
 
@@ -189,8 +189,8 @@ void Item::parsimPack(omnetpp::cCommBuffer *b) const
     doParsimPacking(b,this->counter);
     doParsimPacking(b,this->isDiscarded_);
     doParsimPacking(b,this->generationTime);
-    doParsimPacking(b,this->arrivalTime);
     doParsimPacking(b,this->startTime);
+    doParsimPacking(b,this->discardTime);
     doParsimPacking(b,this->productionTime);
 }
 
@@ -200,8 +200,8 @@ void Item::parsimUnpack(omnetpp::cCommBuffer *b)
     doParsimUnpacking(b,this->counter);
     doParsimUnpacking(b,this->isDiscarded_);
     doParsimUnpacking(b,this->generationTime);
-    doParsimUnpacking(b,this->arrivalTime);
     doParsimUnpacking(b,this->startTime);
+    doParsimUnpacking(b,this->discardTime);
     doParsimUnpacking(b,this->productionTime);
 }
 
@@ -239,16 +239,6 @@ void Item::setGenerationTime(double generationTime)
     this->generationTime = generationTime;
 }
 
-double Item::getArrivalTime() const
-{
-    return this->arrivalTime;
-}
-
-void Item::setArrivalTime(double arrivalTime)
-{
-    this->arrivalTime = arrivalTime;
-}
-
 double Item::getStartTime() const
 {
     return this->startTime;
@@ -257,6 +247,16 @@ double Item::getStartTime() const
 void Item::setStartTime(double startTime)
 {
     this->startTime = startTime;
+}
+
+double Item::getDiscardTime() const
+{
+    return this->discardTime;
+}
+
+void Item::setDiscardTime(double discardTime)
+{
+    this->discardTime = discardTime;
 }
 
 double Item::getProductionTime() const
@@ -277,8 +277,8 @@ class ItemDescriptor : public omnetpp::cClassDescriptor
         FIELD_counter,
         FIELD_isDiscarded,
         FIELD_generationTime,
-        FIELD_arrivalTime,
         FIELD_startTime,
+        FIELD_discardTime,
         FIELD_productionTime,
     };
   public:
@@ -361,8 +361,8 @@ unsigned int ItemDescriptor::getFieldTypeFlags(int field) const
         FD_ISEDITABLE,    // FIELD_counter
         FD_ISEDITABLE,    // FIELD_isDiscarded
         FD_ISEDITABLE,    // FIELD_generationTime
-        FD_ISEDITABLE,    // FIELD_arrivalTime
         FD_ISEDITABLE,    // FIELD_startTime
+        FD_ISEDITABLE,    // FIELD_discardTime
         FD_ISEDITABLE,    // FIELD_productionTime
     };
     return (field >= 0 && field < 6) ? fieldTypeFlags[field] : 0;
@@ -380,8 +380,8 @@ const char *ItemDescriptor::getFieldName(int field) const
         "counter",
         "isDiscarded",
         "generationTime",
-        "arrivalTime",
         "startTime",
+        "discardTime",
         "productionTime",
     };
     return (field >= 0 && field < 6) ? fieldNames[field] : nullptr;
@@ -394,8 +394,8 @@ int ItemDescriptor::findField(const char *fieldName) const
     if (strcmp(fieldName, "counter") == 0) return baseIndex + 0;
     if (strcmp(fieldName, "isDiscarded") == 0) return baseIndex + 1;
     if (strcmp(fieldName, "generationTime") == 0) return baseIndex + 2;
-    if (strcmp(fieldName, "arrivalTime") == 0) return baseIndex + 3;
-    if (strcmp(fieldName, "startTime") == 0) return baseIndex + 4;
+    if (strcmp(fieldName, "startTime") == 0) return baseIndex + 3;
+    if (strcmp(fieldName, "discardTime") == 0) return baseIndex + 4;
     if (strcmp(fieldName, "productionTime") == 0) return baseIndex + 5;
     return base ? base->findField(fieldName) : -1;
 }
@@ -412,8 +412,8 @@ const char *ItemDescriptor::getFieldTypeString(int field) const
         "int",    // FIELD_counter
         "bool",    // FIELD_isDiscarded
         "double",    // FIELD_generationTime
-        "double",    // FIELD_arrivalTime
         "double",    // FIELD_startTime
+        "double",    // FIELD_discardTime
         "double",    // FIELD_productionTime
     };
     return (field >= 0 && field < 6) ? fieldTypeStrings[field] : nullptr;
@@ -502,8 +502,8 @@ std::string ItemDescriptor::getFieldValueAsString(omnetpp::any_ptr object, int f
         case FIELD_counter: return long2string(pp->getCounter());
         case FIELD_isDiscarded: return bool2string(pp->isDiscarded());
         case FIELD_generationTime: return double2string(pp->getGenerationTime());
-        case FIELD_arrivalTime: return double2string(pp->getArrivalTime());
         case FIELD_startTime: return double2string(pp->getStartTime());
+        case FIELD_discardTime: return double2string(pp->getDiscardTime());
         case FIELD_productionTime: return double2string(pp->getProductionTime());
         default: return "";
     }
@@ -524,8 +524,8 @@ void ItemDescriptor::setFieldValueAsString(omnetpp::any_ptr object, int field, i
         case FIELD_counter: pp->setCounter(string2long(value)); break;
         case FIELD_isDiscarded: pp->setIsDiscarded(string2bool(value)); break;
         case FIELD_generationTime: pp->setGenerationTime(string2double(value)); break;
-        case FIELD_arrivalTime: pp->setArrivalTime(string2double(value)); break;
         case FIELD_startTime: pp->setStartTime(string2double(value)); break;
+        case FIELD_discardTime: pp->setDiscardTime(string2double(value)); break;
         case FIELD_productionTime: pp->setProductionTime(string2double(value)); break;
         default: throw omnetpp::cRuntimeError("Cannot set field %d of class 'Item'", field);
     }
@@ -544,8 +544,8 @@ omnetpp::cValue ItemDescriptor::getFieldValue(omnetpp::any_ptr object, int field
         case FIELD_counter: return pp->getCounter();
         case FIELD_isDiscarded: return pp->isDiscarded();
         case FIELD_generationTime: return pp->getGenerationTime();
-        case FIELD_arrivalTime: return pp->getArrivalTime();
         case FIELD_startTime: return pp->getStartTime();
+        case FIELD_discardTime: return pp->getDiscardTime();
         case FIELD_productionTime: return pp->getProductionTime();
         default: throw omnetpp::cRuntimeError("Cannot return field %d of class 'Item' as cValue -- field index out of range?", field);
     }
@@ -566,8 +566,8 @@ void ItemDescriptor::setFieldValue(omnetpp::any_ptr object, int field, int i, co
         case FIELD_counter: pp->setCounter(omnetpp::checked_int_cast<int>(value.intValue())); break;
         case FIELD_isDiscarded: pp->setIsDiscarded(value.boolValue()); break;
         case FIELD_generationTime: pp->setGenerationTime(value.doubleValue()); break;
-        case FIELD_arrivalTime: pp->setArrivalTime(value.doubleValue()); break;
         case FIELD_startTime: pp->setStartTime(value.doubleValue()); break;
+        case FIELD_discardTime: pp->setDiscardTime(value.doubleValue()); break;
         case FIELD_productionTime: pp->setProductionTime(value.doubleValue()); break;
         default: throw omnetpp::cRuntimeError("Cannot set field %d of class 'Item'", field);
     }

@@ -17,16 +17,17 @@ Define_Module(ItemGenerator);
 void ItemGenerator::initialize()
 {
     sendItems();
-    scheduleAt(simTime() + 0.5, new cMessage());
 }
 
 void ItemGenerator::handleMessage(cMessage *msg)
 {
-    if (msg->isSelfMessage()){
-        sendItems();
+    if (strcmp(msg->getName(), "hail") == 0){
+        Item *item = new Item();
+        item->setGenerationTime(simTime().dbl());
+        send(item, "out", msg->par("index").longValue());
     }
-    scheduleAt(simTime() + 0.5, new cMessage());
 }
+
 
 void ItemGenerator::sendItems()
 {

@@ -24,5 +24,6 @@ moduleinterface AssemblyLine
         int N;
     gates:
         input in[N];
-        output out;
+        output out[N];
+        output hail_out[N];
 }

@@ -20,6 +20,8 @@ package factory_sim;
 //
 simple ItemReceiver
 {
+    parameters:
+        int N = default(0);
     gates:
-        input in;
+        input in[N];
 }

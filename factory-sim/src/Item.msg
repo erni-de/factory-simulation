@@ -20,7 +20,7 @@ packet Item {
     int counter = 0;
     bool isDiscarded = false; //Is item discarded?
     double generationTime = -1.0; //Time at which item is generated
-    double arrivalTime = -1.0; //Time at which item arrives at factory (is stored in input array)
     double startTime = -1.0; //Time at which first production stage starts
+    double discardTime = -1.0; //Time at which item arrives at factory (is stored in input array)
     double productionTime = -1.0; //Time at which item is finished (last production stage ends)
 }

@@ -23,4 +23,5 @@ simple ItemGenerator
         int N = default(0);
     gates:
         output out[N];
+        input hail_in[N]; //is used to get signal that assemblyline is ready to receive other items to process
 }

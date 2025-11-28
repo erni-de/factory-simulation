@@ -28,8 +28,8 @@ class Item;
  *     int counter = 0;
  *     bool isDiscarded = false; //Is item discarded?
  *     double generationTime = -1.0; //Time at which item is generated
- *     double arrivalTime = -1.0; //Time at which item arrives at factory (is stored in input array)
  *     double startTime = -1.0; //Time at which first production stage starts
+ *     double discardTime = -1.0; //Time at which item arrives at factory (is stored in input array)
  *     double productionTime = -1.0; //Time at which item is finished (last production stage ends)
  * }
  * </pre>
@@ -40,8 +40,8 @@ class Item : public ::omnetpp::cPacket
     int counter = 0;
     bool isDiscarded_ = false;
     double generationTime = -1.0;
-    double arrivalTime = -1.0;
     double startTime = -1.0;
+    double discardTime = -1.0;
     double productionTime = -1.0;
 
   private:
@@ -59,8 +59,7 @@ class Item : public ::omnetpp::cPacket
     virtual void parsimPack(omnetpp::cCommBuffer *b) const override;
     virtual void parsimUnpack(omnetpp::cCommBuffer *b) override;
 
-    virtual void increaseCounter();
-
+    void increaseCounter();
     virtual int getCounter() const;
     virtual void setCounter(int counter);
 
@@ -70,11 +69,11 @@ class Item : public ::omnetpp::cPacket
     virtual double getGenerationTime() const;
     virtual void setGenerationTime(double generationTime);
 
-    virtual double getArrivalTime() const;
-    virtual void setArrivalTime(double arrivalTime);
-
     virtual double getStartTime() const;
     virtual void setStartTime(double startTime);
+
+    virtual double getDiscardTime() const;
+    virtual void setDiscardTime(double discardTime);
 
     virtual double getProductionTime() const;
     virtual void setProductionTime(double productionTime);

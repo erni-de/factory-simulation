@@ -25,4 +25,5 @@ simple Robot
         output outend;
         input in_internal; //in_internal, out_internal used in the middle of production process
         output out_internal;
+        output out_hail;
 }

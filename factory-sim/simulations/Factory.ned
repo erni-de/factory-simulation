@@ -28,8 +28,9 @@ network Factory
         int N = default(0);
         string p = default("");
         @display("bgb=367,332");
+        string assemblyLineType = default("PipelinedAssemblyLine");
     submodules:
-        assemblyLine: <default("PipelinedAssemblyLine")> like AssemblyLine{
+        assemblyLine: <assemblyLineType> like AssemblyLine{
             @display("p=151,158;is=vl");
         }
         generator: ItemGenerator{
@@ -39,7 +40,9 @@ network Factory
     connections:
         for i=0..N-1 {
             generator.out[i] --> assemblyLine.in[i];
+            assemblyLine.out[i] --> receiver.in[i];
+            assemblyLine.hail_out[i] --> generator.hail_in[i];
         }
-        assemblyLine.out --> receiver.in;
+
 
 }

@@ -22,18 +22,31 @@ module PipelinedAssemblyLine like AssemblyLine
 {
     parameters:
         int N = default(0);
+        @display("bgb=321,384");
     gates:
         input in[N];
-        output out;
+        output out[N];
+        output hail_out[N];
     submodules:
-        robot[N]: Robot;
+        useless: UselessModule;
+        robot[N]: Robot {
+            @display("p=124,253;is=vl");
+        }
     connections:
+        in[0] --> robot[0].instart;
+        useless.out --> robot[0].in_internal;
+        robot[N-1].out_internal --> useless.in[0];
         for i=0..N-1 {
-        	in[i] --> robot[0].instart;
-        	robot[i].outend --> out; //every robot can send directly to out (used to manage discarded items)
+            robot[i].outend --> out[i]; //every robot can send directly to out (used to manage discarded items)
+            robot[i].out_hail --> hail_out[i]; //used from robot to signal to the generator that another item can be sent
         }
 
         for i=0..N-2 {
             robot[i].out_internal --> robot[i+1].in_internal; //connect stage[i] --> stage[i+1]
+        }
+
+        for i=1..N-1 {
+            in[i] --> useless.in[i];
+            useless.out2[i - 1] --> robot[i].instart;
         }
 }

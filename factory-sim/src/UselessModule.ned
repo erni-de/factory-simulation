@@ -15,25 +15,11 @@
 
 package factory_sim;
 
-//
-// TODO auto-generated type
-//
-module ParallelizedAssemblyLine like AssemblyLine
-{
+simple UselessModule{
     parameters:
-        int N = default(0);
+        int N;
     gates:
+        output out;
         input in[N];
-        output out[N];
-        output hail_out[N];
-    submodules:
-        robot[N]: Robot;
-    connections:
-        // connect each submodule to compound gates
-        for i=0..N-1 {
-            in[i] --> robot[i].instart;
-            robot[i].out_internal --> robot[i].in_internal;
-            robot[i].outend --> out[i];
-            robot[i].out_hail --> hail_out[i]; //used from robot to signal to the generator that another item can be sent
-        }
+        output out2[N-1];
 }
