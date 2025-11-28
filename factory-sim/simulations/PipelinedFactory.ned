@@ -22,13 +22,13 @@ import factory_sim.ItemReceiver;
 //
 // TODO auto-generated type
 //
-network Factory
+network PipelinedFactory
 {
     parameters:
         int N = default(0);
         string p = default("");
         @display("bgb=367,332");
-        string assemblyLineType = default("PipelinedAssemblyLine");
+        string assemblyLineType = "PipelinedAssemblyLine";
     submodules:
         assemblyLine: <assemblyLineType> like AssemblyLine{
             @display("p=151,158;is=vl");

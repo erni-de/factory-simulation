@@ -1,43 +1,40 @@
 version 3
-run Parallelized-0-20251128-02:31:55-11011
+run Parallelized-0-20251128-02:48:48-12736
 attr configname Parallelized
-attr datetime 20251128-02:31:55
-attr datetimef 20251128-023155
+attr datetime 20251128-02:48:48
+attr datetimef 20251128-024848
 attr experiment Parallelized
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
-attr network Factory
-attr processid 11011
+attr network ParallelizedFactory
+attr processid 12736
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 125
-config **.Factory.assemblyLineType "\"PararallelizedAssemblyLine\""
-config network Factory
+config network ParallelizedFactory
 config cpu-time-limit 200s
 config seed-set 125
 config **.N 5
 config **.p "\"0.9 0.9 0.9 0.9 0.9\""
 
-par Factory.assemblyLine.useless typename "\"factory_sim.UselessModule\""
-par Factory.assemblyLine.useless N 5
-par Factory.assemblyLine.robot[0] typename "\"factory_sim.Robot\""
-par Factory.assemblyLine.robot[1] typename "\"factory_sim.Robot\""
-par Factory.assemblyLine.robot[2] typename "\"factory_sim.Robot\""
-par Factory.assemblyLine.robot[3] typename "\"factory_sim.Robot\""
-par Factory.assemblyLine.robot[4] typename "\"factory_sim.Robot\""
-par Factory.assemblyLine typename "\"factory_sim.PipelinedAssemblyLine\""
-par Factory.assemblyLine N 5
-par Factory.generator typename "\"factory_sim.ItemGenerator\""
-par Factory.generator N 5
-par Factory.receiver typename "\"factory_sim.ItemReceiver\""
-par Factory.receiver N 5
-par Factory typename "\"factory_sim.simulations.Factory\""
-par Factory N 5
-par Factory p "\"0.9 0.9 0.9 0.9 0.9\""
-par Factory assemblyLineType "\"PipelinedAssemblyLine\""
+par ParallelizedFactory.assemblyLine.robot[0] typename "\"factory_sim.Robot\""
+par ParallelizedFactory.assemblyLine.robot[1] typename "\"factory_sim.Robot\""
+par ParallelizedFactory.assemblyLine.robot[2] typename "\"factory_sim.Robot\""
+par ParallelizedFactory.assemblyLine.robot[3] typename "\"factory_sim.Robot\""
+par ParallelizedFactory.assemblyLine.robot[4] typename "\"factory_sim.Robot\""
+par ParallelizedFactory.assemblyLine typename "\"factory_sim.ParallelizedAssemblyLine\""
+par ParallelizedFactory.assemblyLine N 5
+par ParallelizedFactory.generator typename "\"factory_sim.ItemGenerator\""
+par ParallelizedFactory.generator N 5
+par ParallelizedFactory.receiver typename "\"factory_sim.ItemReceiver\""
+par ParallelizedFactory.receiver N 5
+par ParallelizedFactory typename "\"factory_sim.simulations.ParallelizedFactory\""
+par ParallelizedFactory N 5
+par ParallelizedFactory p "\"0.9 0.9 0.9 0.9 0.9\""
+par ParallelizedFactory assemblyLineType "\"ParallelizedAssemblyLine\""
 
