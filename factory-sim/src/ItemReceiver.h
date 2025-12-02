@@ -1,0 +1,27 @@
+/*
+ * ItemReceiver.h
+ *
+ *  Created on: Nov 18, 2025
+ *      Author: erni
+ */
+
+#ifndef ITEMRECEIVER_H_
+#define ITEMRECEIVER_H_
+
+
+#include <omnetpp.h>
+#include "Item_m.h"
+
+using namespace omnetpp;
+
+
+class ItemReceiver : public cSimpleModule
+{
+protected:
+    virtual void initialize() override;
+    virtual void handleMessage(cMessage *) override;
+    virtual void finish() override;
+};
+
+
+#endif /* ITEMRECEIVER_H_ */

@@ -1,0 +1,40 @@
+version 3
+run Parallelized-0-20251128-02:48:48-12736
+attr configname Parallelized
+attr datetime 20251128-02:48:48
+attr datetimef 20251128-024848
+attr experiment Parallelized
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network ParallelizedFactory
+attr processid 12736
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 125
+config network ParallelizedFactory
+config cpu-time-limit 200s
+config seed-set 125
+config **.N 5
+config **.p "\"0.9 0.9 0.9 0.9 0.9\""
+
+par ParallelizedFactory.assemblyLine.robot[0] typename "\"factory_sim.Robot\""
+par ParallelizedFactory.assemblyLine.robot[1] typename "\"factory_sim.Robot\""
+par ParallelizedFactory.assemblyLine.robot[2] typename "\"factory_sim.Robot\""
+par ParallelizedFactory.assemblyLine.robot[3] typename "\"factory_sim.Robot\""
+par ParallelizedFactory.assemblyLine.robot[4] typename "\"factory_sim.Robot\""
+par ParallelizedFactory.assemblyLine typename "\"factory_sim.ParallelizedAssemblyLine\""
+par ParallelizedFactory.assemblyLine N 5
+par ParallelizedFactory.generator typename "\"factory_sim.ItemGenerator\""
+par ParallelizedFactory.generator N 5
+par ParallelizedFactory.receiver typename "\"factory_sim.ItemReceiver\""
+par ParallelizedFactory.receiver N 5
+par ParallelizedFactory typename "\"factory_sim.simulations.ParallelizedFactory\""
+par ParallelizedFactory N 5
+par ParallelizedFactory p "\"0.9 0.9 0.9 0.9 0.9\""
+par ParallelizedFactory assemblyLineType "\"ParallelizedAssemblyLine\""
+
