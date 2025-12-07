@@ -21,6 +21,11 @@ protected:
     virtual void initialize() override;
     virtual void handleMessage(cMessage *) override;
     virtual void finish() override;
+
+private:
+    simsignal_t responseTimeSignal;
+    simsignal_t goodItemSignal;
+    simsignal_t defectiveItemSignal;
 };
 
 

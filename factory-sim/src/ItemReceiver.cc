@@ -15,6 +15,12 @@ Define_Module(ItemReceiver);
 std::ofstream csvFile;
 
 void ItemReceiver::initialize(){
+
+    //Registro i segnali per le statistiche
+    responseTimeSignal = registerSignal("itemResponseTime");
+    goodItemSignal = registerSignal("goodItem");
+    defectiveItemSignal = registerSignal("defectiveItem");
+
     csvFile.open("output.csv", std::ios::out);
     if (!csvFile.is_open()) {
             EV_INFO << "Error opening CSV file!\n";
@@ -30,6 +36,22 @@ void ItemReceiver::handleMessage(cMessage *msg){
         // Write data
     csvFile << item->getCounter() << "," << item->isDiscarded() << "," << item->getGenerationTime() << "," << item->getStartTime() << ","  << item->getDiscardTime()  << ","  << item->getProductionTime() << "\n";
 
+    //Aggiungo la roba delle statistiche
+
+    //L'item è buono salvo responseTime
+    if(!item->isDiscarde()){
+        simtime_t rt = item->getProductionTime() - item->getGenerationTime();
+        emit(responseTimeSignal, rt);
+
+        //Casto perché l'ho salvato come long
+        emit(goodItemSignal, (long)1);
+
+    }else{
+
+        //Conta item difettosi
+        emit(defectiveItemSignal, (long)1);
+
+    }
 }
 
 void ItemReceiver::finish() {

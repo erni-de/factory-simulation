@@ -18,10 +18,25 @@ package factory_sim;
 //
 // TODO auto-generated type
 //
+
+//Statistica per tempo di produzione di item non difettosi
+//Definisco R = ProductionTime - generationTime
+//(Poi ci sarà da considerare il warmup period)
+
 simple ItemReceiver
 {
     parameters:
         int N = default(0);
-    gates:
+
+        @signal[itemResponseTime](type = double);
+        @statistic[itemResponseTime](source = "itemResponseTime"; record = mean,vector; unit = "s");
+
+        @signal[goodItem](type = long); //Lo useremo anche per la percentuale dei difettosi
+    	@statistic[goodItem](source="goodItem"; record=count;);
+    	
+    	@signal[defectiveItem](type=long);	//Anche questo serve per la percentuale dei difettosi
+    	@statistic[defectiveItem](source = "defectiveItem"; record = count;);
+    	
+   	gates:
         input in[N];
 }
