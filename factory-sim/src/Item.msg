@@ -23,4 +23,5 @@ packet Item {
     double startTime = -1.0; //Time at which first production stage starts
     double discardTime = -1.0; //Time at which item arrives at factory (is stored in input array)
     double productionTime = -1.0; //Time at which item is finished (last production stage ends)
+	double totalWaitingTime = 0; //Ci sommo dentro il tempo di attesa nelle code (in coda per parallelized)
 }

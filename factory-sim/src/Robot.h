@@ -29,6 +29,10 @@ class Robot : public cSimpleModule
         bool busy;
         cQueue msgQueue;
 
+        //Statistica utilizzo tempo medio robot
+        simsignal_t busyPeriodSignal;
+        simtime_t busyStart;
+
     protected:
         virtual void initialize() override;
         virtual void handleMessage(cMessage *msg) override;

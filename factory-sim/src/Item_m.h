@@ -31,6 +31,7 @@ class Item;
  *     double startTime = -1.0; //Time at which first production stage starts
  *     double discardTime = -1.0; //Time at which item arrives at factory (is stored in input array)
  *     double productionTime = -1.0; //Time at which item is finished (last production stage ends)
+ *     double totalWaitingTime = 0; //Ci sommo dentro il tempo di attesa nelle code (in coda per parallelized)
  * }
  * </pre>
  */
@@ -43,6 +44,7 @@ class Item : public ::omnetpp::cPacket
     double startTime = -1.0;
     double discardTime = -1.0;
     double productionTime = -1.0;
+    double totalWaitingTime = 0;
 
   private:
     void copy(const Item& other);
@@ -59,7 +61,6 @@ class Item : public ::omnetpp::cPacket
     virtual void parsimPack(omnetpp::cCommBuffer *b) const override;
     virtual void parsimUnpack(omnetpp::cCommBuffer *b) override;
 
-    void increaseCounter();
     virtual int getCounter() const;
     virtual void setCounter(int counter);
 
@@ -77,6 +78,9 @@ class Item : public ::omnetpp::cPacket
 
     virtual double getProductionTime() const;
     virtual void setProductionTime(double productionTime);
+
+    virtual double getTotalWaitingTime() const;
+    virtual void setTotalWaitingTime(double totalWaitingTime);
 };
 
 inline void doParsimPacking(omnetpp::cCommBuffer *b, const Item& obj) {obj.parsimPack(b);}

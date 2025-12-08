@@ -181,6 +181,7 @@ void Item::copy(const Item& other)
     this->startTime = other.startTime;
     this->discardTime = other.discardTime;
     this->productionTime = other.productionTime;
+    this->totalWaitingTime = other.totalWaitingTime;
 }
 
 void Item::parsimPack(omnetpp::cCommBuffer *b) const
@@ -192,6 +193,7 @@ void Item::parsimPack(omnetpp::cCommBuffer *b) const
     doParsimPacking(b,this->startTime);
     doParsimPacking(b,this->discardTime);
     doParsimPacking(b,this->productionTime);
+    doParsimPacking(b,this->totalWaitingTime);
 }
 
 void Item::parsimUnpack(omnetpp::cCommBuffer *b)
@@ -203,10 +205,7 @@ void Item::parsimUnpack(omnetpp::cCommBuffer *b)
     doParsimUnpacking(b,this->startTime);
     doParsimUnpacking(b,this->discardTime);
     doParsimUnpacking(b,this->productionTime);
-}
-
-void Item::increaseCounter(){
-    this->counter = this->counter + 1;
+    doParsimUnpacking(b,this->totalWaitingTime);
 }
 
 int Item::getCounter() const
@@ -269,6 +268,16 @@ void Item::setProductionTime(double productionTime)
     this->productionTime = productionTime;
 }
 
+double Item::getTotalWaitingTime() const
+{
+    return this->totalWaitingTime;
+}
+
+void Item::setTotalWaitingTime(double totalWaitingTime)
+{
+    this->totalWaitingTime = totalWaitingTime;
+}
+
 class ItemDescriptor : public omnetpp::cClassDescriptor
 {
   private:
@@ -280,6 +289,7 @@ class ItemDescriptor : public omnetpp::cClassDescriptor
         FIELD_startTime,
         FIELD_discardTime,
         FIELD_productionTime,
+        FIELD_totalWaitingTime,
     };
   public:
     ItemDescriptor();
@@ -346,7 +356,7 @@ const char *ItemDescriptor::getProperty(const char *propertyName) const
 int ItemDescriptor::getFieldCount() const
 {
     omnetpp::cClassDescriptor *base = getBaseClassDescriptor();
-    return base ? 6+base->getFieldCount() : 6;
+    return base ? 7+base->getFieldCount() : 7;
 }
 
 unsigned int ItemDescriptor::getFieldTypeFlags(int field) const
@@ -364,8 +374,9 @@ unsigned int ItemDescriptor::getFieldTypeFlags(int field) const
         FD_ISEDITABLE,    // FIELD_startTime
         FD_ISEDITABLE,    // FIELD_discardTime
         FD_ISEDITABLE,    // FIELD_productionTime
+        FD_ISEDITABLE,    // FIELD_totalWaitingTime
     };
-    return (field >= 0 && field < 6) ? fieldTypeFlags[field] : 0;
+    return (field >= 0 && field < 7) ? fieldTypeFlags[field] : 0;
 }
 
 const char *ItemDescriptor::getFieldName(int field) const
@@ -383,8 +394,9 @@ const char *ItemDescriptor::getFieldName(int field) const
         "startTime",
         "discardTime",
         "productionTime",
+        "totalWaitingTime",
     };
-    return (field >= 0 && field < 6) ? fieldNames[field] : nullptr;
+    return (field >= 0 && field < 7) ? fieldNames[field] : nullptr;
 }
 
 int ItemDescriptor::findField(const char *fieldName) const
@@ -397,6 +409,7 @@ int ItemDescriptor::findField(const char *fieldName) const
     if (strcmp(fieldName, "startTime") == 0) return baseIndex + 3;
     if (strcmp(fieldName, "discardTime") == 0) return baseIndex + 4;
     if (strcmp(fieldName, "productionTime") == 0) return baseIndex + 5;
+    if (strcmp(fieldName, "totalWaitingTime") == 0) return baseIndex + 6;
     return base ? base->findField(fieldName) : -1;
 }
 
@@ -415,8 +428,9 @@ const char *ItemDescriptor::getFieldTypeString(int field) const
         "double",    // FIELD_startTime
         "double",    // FIELD_discardTime
         "double",    // FIELD_productionTime
+        "double",    // FIELD_totalWaitingTime
     };
-    return (field >= 0 && field < 6) ? fieldTypeStrings[field] : nullptr;
+    return (field >= 0 && field < 7) ? fieldTypeStrings[field] : nullptr;
 }
 
 const char **ItemDescriptor::getFieldPropertyNames(int field) const
@@ -505,6 +519,7 @@ std::string ItemDescriptor::getFieldValueAsString(omnetpp::any_ptr object, int f
         case FIELD_startTime: return double2string(pp->getStartTime());
         case FIELD_discardTime: return double2string(pp->getDiscardTime());
         case FIELD_productionTime: return double2string(pp->getProductionTime());
+        case FIELD_totalWaitingTime: return double2string(pp->getTotalWaitingTime());
         default: return "";
     }
 }
@@ -527,6 +542,7 @@ void ItemDescriptor::setFieldValueAsString(omnetpp::any_ptr object, int field, i
         case FIELD_startTime: pp->setStartTime(string2double(value)); break;
         case FIELD_discardTime: pp->setDiscardTime(string2double(value)); break;
         case FIELD_productionTime: pp->setProductionTime(string2double(value)); break;
+        case FIELD_totalWaitingTime: pp->setTotalWaitingTime(string2double(value)); break;
         default: throw omnetpp::cRuntimeError("Cannot set field %d of class 'Item'", field);
     }
 }
@@ -547,6 +563,7 @@ omnetpp::cValue ItemDescriptor::getFieldValue(omnetpp::any_ptr object, int field
         case FIELD_startTime: return pp->getStartTime();
         case FIELD_discardTime: return pp->getDiscardTime();
         case FIELD_productionTime: return pp->getProductionTime();
+        case FIELD_totalWaitingTime: return pp->getTotalWaitingTime();
         default: throw omnetpp::cRuntimeError("Cannot return field %d of class 'Item' as cValue -- field index out of range?", field);
     }
 }
@@ -569,6 +586,7 @@ void ItemDescriptor::setFieldValue(omnetpp::any_ptr object, int field, int i, co
         case FIELD_startTime: pp->setStartTime(value.doubleValue()); break;
         case FIELD_discardTime: pp->setDiscardTime(value.doubleValue()); break;
         case FIELD_productionTime: pp->setProductionTime(value.doubleValue()); break;
+        case FIELD_totalWaitingTime: pp->setTotalWaitingTime(value.doubleValue()); break;
         default: throw omnetpp::cRuntimeError("Cannot set field %d of class 'Item'", field);
     }
 }

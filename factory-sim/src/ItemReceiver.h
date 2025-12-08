@@ -26,6 +26,8 @@ private:
     simsignal_t responseTimeSignal;
     simsignal_t goodItemSignal;
     simsignal_t defectiveItemSignal;
+    simsignal_t waitingTimeSignal;
+    simsingal_t completedItemSignal;
 };
 
 

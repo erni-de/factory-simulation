@@ -20,6 +20,11 @@ package factory_sim;
 //
 simple Robot
 {
+   	//Statistica del tempo medio di utilizzo
+    parameters:
+        @signal[busyPeriod](type = double);
+        @statistic[busyPeriod](source = "busyPeriod"; record = mean,sum,vector; unit = "s");
+
     gates:
         input instart; //instart, outend used for communicating with assembly line endpoints
         output outend;

@@ -17,42 +17,55 @@ std::ofstream csvFile;
 void ItemReceiver::initialize(){
 
     //Registro i segnali per le statistiche
-    responseTimeSignal = registerSignal("itemResponseTime");
-    goodItemSignal = registerSignal("goodItem");
-    defectiveItemSignal = registerSignal("defectiveItem");
+    responseTimeSignal   = registerSignal("itemResponseTime");
+    goodItemSignal       = registerSignal("goodItem");
+    defectiveItemSignal  = registerSignal("defectiveItem");
+    waitingTimeSignal    = registerSignal("itemWaitingTime");
+    completedItemSignal  = registerSignal("completedItem");
 
     csvFile.open("output.csv", std::ios::out);
     if (!csvFile.is_open()) {
-            EV_INFO << "Error opening CSV file!\n";
-        } else {
-            EV_INFO << "CSV file opened successfully.\n";
-            csvFile << "counter,discarded,gen_time,arrival_time,discard_time,prod_time\n";  // CSV header
+        EV_INFO << "Error opening CSV file!\n";
+    } else {
+        EV_INFO << "CSV file opened successfully.\n";
+        csvFile << "counter,discarded,gen_time,arrival_time,discard_time,prod_time\n";
     }
 }
 
 void ItemReceiver::handleMessage(cMessage *msg){
-    Item *item = check_and_cast<Item*>(msg); //casts generic cMessage into Item_m
-    EV_INFO << "Item arrived!";
-        // Write data
-    csvFile << item->getCounter() << "," << item->isDiscarded() << "," << item->getGenerationTime() << "," << item->getStartTime() << ","  << item->getDiscardTime()  << ","  << item->getProductionTime() << "\n";
+    Item *item = check_and_cast<Item*>(msg);
 
-    //Aggiungo la roba delle statistiche
+    //Ogni item che arriva qui è completato
+    emit(completedItemSignal, 1);
 
-    //L'item è buono salvo responseTime
-    if(!item->isDiscarde()){
+    if (!item->isDiscarded()) {
         simtime_t rt = item->getProductionTime() - item->getGenerationTime();
-        emit(responseTimeSignal, rt);
 
-        //Casto perché l'ho salvato come long
-        emit(goodItemSignal, (long)1);
+        //NB --> Le statistiche le ho fatte per gli item buoni
+        //Se vogliamo considerare tutti basta spostare le emit fuori dall'if
+        emit(responseTimeSignal, rt);   //tempo di produzione item buoni
+        emit(goodItemSignal, 1);        //conta buoni
+        emit(waitingTimeSignal, item->getTotalWaitingTime()); //Tempo totale in coda
 
-    }else{
-
-        //Conta item difettosi
-        emit(defectiveItemSignal, (long)1);
-
+    } else {
+        simtime_t life = item->getDiscardTime() - item->getGenerationTime();
+        emit(defectiveLifetimeSignal, life); //Salvo il tempo per capire quanto ci metto a scartarlo
+        emit(defectiveItemSignal, 1);   //conta difettosi
     }
+
+    EV_INFO << "Item arrived!";
+    csvFile << item->getCounter() << ","
+            << item->isDiscarded() << ","
+            << item->getGenerationTime() << ","
+            << item->getStartTime() << ","
+            << item->getDiscardTime() << ","
+            << item->getProductionTime() << "\n";
+
+    //Dealloco non avrà più owner
+    delete item;
 }
+
+
 
 void ItemReceiver::finish() {
     if (csvFile.is_open()) {

@@ -34,9 +34,18 @@ simple ItemReceiver
         @signal[goodItem](type = long); //Lo useremo anche per la percentuale dei difettosi
     	@statistic[goodItem](source="goodItem"; record=count;);
     	
-    	@signal[defectiveItem](type=long);	//Anche questo serve per la percentuale dei difettosi
+    	@signal[defectiveItem](type = long); //Anche questo serve per la percentuale dei difettosi
     	@statistic[defectiveItem](source = "defectiveItem"; record = count;);
     	
+    	@signal[itemWaitingTime](type = double); //Questo memorizza il tempo medio di attesa in coda
+    	@statistic[itemWaitingTime](source = "itemWaitingTime"; record = mean,vector; unit = "s");
+   	
+   		@signal[completedItem](type = long);	//Questo serve per il throughput medio del sistema
+   		@statistic[completedItem](source="completedItem"; record=count;);
+   		
+   		@signal[defectiveLifetime](type=double); //Tempo medio per scartare un oggetto difettoso
+		@statistic[defectiveLifetime](source="defectiveLifetime"; record=mean,vector; unit="s");
+
    	gates:
         input in[N];
 }
