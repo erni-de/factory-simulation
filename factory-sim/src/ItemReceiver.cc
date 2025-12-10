@@ -22,6 +22,14 @@ void ItemReceiver::initialize(){
     defectiveItemSignal  = registerSignal("defectiveItem");
     waitingTimeSignal    = registerSignal("itemWaitingTime");
     completedItemSignal  = registerSignal("completedItem");
+    defectiveLifetimeSignal = registerSignal("defectiveLifetime");
+
+    frequency_histogram.setName("Stages Passed");
+    frequency_histogram.setRange(0,(int)par("N")+1);
+    frequency_histogram.setNumBinsHint((int)par("N") + 1);
+    frequency_histogram.setMode(cHistogram::MODE_INTEGERS);
+
+
 
     csvFile.open("output.csv", std::ios::out);
     if (!csvFile.is_open()) {
@@ -37,6 +45,7 @@ void ItemReceiver::handleMessage(cMessage *msg){
 
     //Ogni item che arriva qui è completato
     emit(completedItemSignal, 1);
+    frequency_histogram.collect(item->getCounter());
 
     if (!item->isDiscarded()) {
         simtime_t rt = item->getProductionTime() - item->getGenerationTime();
@@ -72,5 +81,6 @@ void ItemReceiver::finish() {
         csvFile.close();
         EV_INFO << "CSV file closed.\n";
     }
+    recordStatistic(&frequency_histogram);
 }
 
