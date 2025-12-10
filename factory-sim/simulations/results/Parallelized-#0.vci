@@ -1,61 +1,55 @@
-file 1534004 1765395817                                         
+file 1431 1765397299                                            
 version 3
-run Parallelized-0-20251210-20:43:27-21914
+run Parallelized-0-20251210-21:08:13-26283
 attr configname Parallelized
-attr datetime 20251210-20:43:27
-attr datetimef 20251210-204327
+attr datetime 20251210-21:08:13
+attr datetimef 20251210-210813
 attr experiment Parallelized
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
-attr network ParallelizedFactory
-attr processid 21914
+attr network Factory
+attr processid 26283
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 125
-config network ParallelizedFactory
+config **.mode "\"parallelized\""
 config cpu-time-limit 200s
 config seed-set 125
 config **.N 4
 config **.p "\"0.78 0.9 0.98 0.1\""
+config network Factory
 
-vector 0 ParallelizedFactory.assemblyLine.robot[0] busyPeriod:vector ETV
+vector 0 Factory.assemblyLine.robot[0] busyPeriod:vector ETV
 attr recordingmode vector
 attr source busyPeriod
 attr unit s
-vector 1 ParallelizedFactory.assemblyLine.robot[1] busyPeriod:vector ETV
+vector 1 Factory.assemblyLine.robot[1] busyPeriod:vector ETV
 attr recordingmode vector
 attr source busyPeriod
 attr unit s
-vector 2 ParallelizedFactory.assemblyLine.robot[2] busyPeriod:vector ETV
+vector 2 Factory.assemblyLine.robot[2] busyPeriod:vector ETV
 attr recordingmode vector
 attr source busyPeriod
 attr unit s
-vector 3 ParallelizedFactory.assemblyLine.robot[3] busyPeriod:vector ETV
+vector 3 Factory.assemblyLine.robot[3] busyPeriod:vector ETV
 attr recordingmode vector
 attr source busyPeriod
 attr unit s
-vector 4 ParallelizedFactory.receiver itemResponseTime:vector ETV
+vector 4 Factory.receiver itemResponseTime:vector ETV
 attr recordingmode vector
 attr source itemResponseTime
 attr unit s
-vector 5 ParallelizedFactory.receiver itemWaitingTime:vector ETV
+vector 5 Factory.receiver itemWaitingTime:vector ETV
 attr recordingmode vector
 attr source itemWaitingTime
 attr unit s
-vector 6 ParallelizedFactory.receiver defectiveLifetime:vector ETV
+vector 6 Factory.receiver defectiveLifetime:vector ETV
 attr recordingmode vector
 attr source defectiveLifetime
 attr unit s
-0	1504 291653 11 75197 0.506726010935 3567.490230871613 7234 4.8443442e-05 0.999899131013 3567.4902308716 2351.709090578
-1	293157 289989 25 75203 0.981974161463 3567.843130503794 7191 0.00019393512 0.999841433484 3567.8431305038 2363.7005306733
-2	583146 285359 5 75199 0.057530694176 3567.569778061007 7075 3.0321535e-05 0.99985147058 3567.569778061 2389.2099156153
-3	868505 285861 7 75201 0.195721586933 3567.826879318768 7092 7.285038e-06 0.999914628454 3567.8268793188 2394.2132038422
-4	1154366 24085 74 75012 3.019435238093 3558.759895883466 596 0.270917420043 3.489544894081 1191.9979188347 2591.2681859054
-5	1178451 16395 74 75012 3.019435238093 3558.759895883466 596 0 0 0 0
-6	1194846 339157 12 75192 0.506726010935 3567.256174415118 8412 7.0535345e-05 3.668004732346 13074.713637584 26058.38846769
 

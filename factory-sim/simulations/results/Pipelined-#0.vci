@@ -1,9 +1,9 @@
-file 1575 1765394095                                            
+file 1419 1765397401                                            
 version 3
-run Pipelined-0-20251210-20:14:42-2456
+run Pipelined-0-20251210-21:08:29-26378
 attr configname Pipelined
-attr datetime 20251210-20:14:42
-attr datetimef 20251210-201442
+attr datetime 20251210-21:08:29
+attr datetimef 20251210-210829
 attr experiment Pipelined
 attr inifile omnetpp.ini
 attr iterationvars ""
@@ -11,7 +11,7 @@ attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network Factory
-attr processid 2456
+attr processid 26378
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -20,8 +20,8 @@ attr seedset 125
 config **.mode "\"pipelined\""
 config cpu-time-limit 200s
 config seed-set 125
-config **.N 5
-config **.p "\"0.9 0.9 0.9 0.9 0.9\""
+config **.N 4
+config **.p "\"0.78 0.9 0.98 0.1\""
 config network Factory
 
 vector 0 Factory.assemblyLine.robot[0] busyPeriod:vector ETV
@@ -40,21 +40,16 @@ vector 3 Factory.assemblyLine.robot[3] busyPeriod:vector ETV
 attr recordingmode vector
 attr source busyPeriod
 attr unit s
-vector 4 Factory.assemblyLine.robot[4] busyPeriod:vector ETV
-attr recordingmode vector
-attr source busyPeriod
-attr unit s
-vector 5 Factory.receiver itemResponseTime:vector ETV
+vector 4 Factory.receiver itemResponseTime:vector ETV
 attr recordingmode vector
 attr source itemResponseTime
 attr unit s
-vector 6 Factory.receiver itemWaitingTime:vector ETV
+vector 5 Factory.receiver itemWaitingTime:vector ETV
 attr recordingmode vector
 attr source itemWaitingTime
 attr unit s
-vector 7 Factory.receiver defectiveLifetime:vector ETV
+vector 6 Factory.receiver defectiveLifetime:vector ETV
 attr recordingmode vector
 attr source defectiveLifetime
 attr unit s
-0	1540 34 2 2 0.506726010935 0.506726010935 1 0.506726010935 0.506726010935 0.506726010935 0.2567712501581
 
