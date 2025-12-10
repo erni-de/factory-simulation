@@ -22,27 +22,31 @@ import factory_sim.ItemReceiver;
 //
 // TODO auto-generated type
 //
-network ParallelizedFactory
+network Factory
 {
     parameters:
         int N = default(0);
         string p = default("");
+        string mode = default("parallelized");
         @display("bgb=367,332");
-        string assemblyLineType = "ParallelizedAssemblyLine";
     submodules:
-        assemblyLine: <assemblyLineType> like AssemblyLine{
+        assemblyLine: AssemblyLine{
+            mode = parent.mode;
+            N = parent.N;
             @display("p=151,158;is=vl");
         }
         generator: ItemGenerator{
             @display("p=266,245;is=vl");
         }
         receiver: ItemReceiver;
-    connections:
-        for i=0..N-1 {
-            generator.out[i] --> assemblyLine.in[i];
-            assemblyLine.out[i] --> receiver.in[i];
-            assemblyLine.hail_out[i] --> generator.hail_in[i];
+    connections allowunconnected:
+        generator.out[0] --> assemblyLine.in[0];
+        assemblyLine.hail_out[0] --> generator.hail_in[0];
+        assemblyLine.out[0] --> receiver.in[0];
+        for i=1..N-1 {
+            generator.out[i] --> assemblyLine.in[i] if mode == "parallelized";
+            assemblyLine.out[i] --> receiver.in[i] if mode == "parallelized";
+            assemblyLine.hail_out[i] --> generator.hail_in[i] if mode == "parallelized";
         }
-
 
 }

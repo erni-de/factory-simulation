@@ -32,11 +32,19 @@ void ItemGenerator::handleMessage(cMessage *msg)
 void ItemGenerator::sendItems()
 {
     cModule *factory = getParentModule();
+    const char* mode = factory->par("mode").stringValue();
     int N = factory->par("N");
-    for (int i = 0; i < N; i++){
+    if(strcmp(mode, "parallelized") == 0)
+        for (int i = 0; i < N; i++){
             Item *item = new Item();
             item->setGenerationTime(simTime().dbl());
             send(item, "out", i);
         }
+    else{
+        Item *item = new Item();
+        item->setGenerationTime(simTime().dbl());
+        send(item, "out", 0);
+    }
+
 }
 
