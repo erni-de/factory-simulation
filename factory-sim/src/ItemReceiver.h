@@ -23,6 +23,7 @@ protected:
     virtual void finish() override;
 
 private:
+    cHistogram frequency_histogram;
     simsignal_t responseTimeSignal;
     simsignal_t goodItemSignal;
     simsignal_t defectiveItemSignal;
