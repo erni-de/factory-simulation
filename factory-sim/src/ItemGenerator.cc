@@ -23,8 +23,14 @@ void ItemGenerator::handleMessage(cMessage *msg)
 {
     if (strcmp(msg->getName(), "hail") == 0){
         Item *item = new Item();
+        cModule *factory = getParentModule();
+        const char* mode = factory->par("mode").stringValue();
         item->setGenerationTime(simTime().dbl());
-        send(item, "out", msg->par("index").longValue());
+        if(strcmp(mode, "parallelized") == 0)
+            send(item, "out", msg->par("index").longValue());
+        else
+            send(item, "out",0);
+
     }
 }
 

@@ -1,0 +1,112 @@
+version 3
+run Pipelined-0-20260107-15:14:49-25970
+attr configname Pipelined
+attr datetime 20260107-15:14:49
+attr datetimef 20260107-151449
+attr experiment Pipelined
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network Factory
+attr processid 25970
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 125
+config **.mode "\"pipelined\""
+config cpu-time-limit 200s
+config seed-set 125
+config **.N 4
+config **.p "\"0.78 0.9 0.98 0.1\""
+config network Factory
+
+par Factory.assemblyLine.robot[0] typename "\"factory_sim.Robot\""
+scalar Factory.assemblyLine.robot[0] busyPeriod:mean 0.50304491071039
+attr recordingmode mean
+attr source busyPeriod
+attr unit s
+scalar Factory.assemblyLine.robot[0] busyPeriod:sum 7244.852804051
+attr recordingmode sum
+attr source busyPeriod
+attr unit s
+par Factory.assemblyLine.robot[1] typename "\"factory_sim.Robot\""
+scalar Factory.assemblyLine.robot[1] busyPeriod:mean 0.49966741716599
+attr recordingmode mean
+attr source busyPeriod
+attr unit s
+scalar Factory.assemblyLine.robot[1] busyPeriod:sum 5651.7381555645
+attr recordingmode sum
+attr source busyPeriod
+attr unit s
+par Factory.assemblyLine.robot[2] typename "\"factory_sim.Robot\""
+scalar Factory.assemblyLine.robot[2] busyPeriod:mean 0.49549752738907
+attr recordingmode mean
+attr source busyPeriod
+attr unit s
+scalar Factory.assemblyLine.robot[2] busyPeriod:sum 5039.7053510742
+attr recordingmode sum
+attr source busyPeriod
+attr unit s
+par Factory.assemblyLine.robot[3] typename "\"factory_sim.Robot\""
+scalar Factory.assemblyLine.robot[3] busyPeriod:mean 0.50323787500709
+attr recordingmode mean
+attr source busyPeriod
+attr unit s
+scalar Factory.assemblyLine.robot[3] busyPeriod:sum 5017.7848516956
+attr recordingmode sum
+attr source busyPeriod
+attr unit s
+par Factory.assemblyLine typename "\"factory_sim.AssemblyLine\""
+par Factory.assemblyLine N 4
+par Factory.assemblyLine mode "\"pipelined\""
+par Factory.generator typename "\"factory_sim.ItemGenerator\""
+par Factory.generator N 4
+par Factory.receiver typename "\"factory_sim.ItemReceiver\""
+par Factory.receiver N 4
+statistic Factory.receiver "Stages Passed"
+field count 14398
+field mean 2.2554521461314
+field stddev 1.333327611813
+field min 0
+field max 4
+field sum 32474
+field sqrsum 98838
+bin	-inf	0
+bin	0	3089
+bin	1	1138
+bin	2	200
+bin	3	8948
+bin	4	1023
+bin	5	0
+scalar Factory.receiver defectiveLifetime:mean 2480.5274199431
+attr recordingmode mean
+attr source defectiveLifetime
+attr unit s
+scalar Factory.receiver completedItem:count 14398
+attr "" ""
+attr recordingmode count
+attr source completedItem
+scalar Factory.receiver itemWaitingTime:mean 2455.6390175331
+attr recordingmode mean
+attr source itemWaitingTime
+attr unit s
+scalar Factory.receiver defectiveItem:count 13375
+attr "" ""
+attr recordingmode count
+attr source defectiveItem
+scalar Factory.receiver goodItem:count 1023
+attr "" ""
+attr recordingmode count
+attr source goodItem
+scalar Factory.receiver itemResponseTime:mean 2457.65887534
+attr recordingmode mean
+attr source itemResponseTime
+attr unit s
+par Factory typename "\"factory_sim.simulations.Factory\""
+par Factory N 4
+par Factory p "\"0.78 0.9 0.98 0.1\""
+par Factory mode "\"pipelined\""
+

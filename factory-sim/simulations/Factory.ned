@@ -41,11 +41,10 @@ network Factory
         receiver: ItemReceiver;
     connections allowunconnected:
         generator.out[0] --> assemblyLine.in[0] if mode != "parallelized";
-        assemblyLine.hail_out[0] --> generator.hail_in[0] if mode != "parallelized";
         for i=0..N-1 {
-            generator.out[i] --> assemblyLine.in[i] if mode == "parallelized";
+            generator.out[i] --> assemblyLine.in[i] if mode  == "parallelized";
             assemblyLine.out[i] --> receiver.in[i];
-            assemblyLine.hail_out[i] --> generator.hail_in[i] if mode == "parallelized";
+            assemblyLine.hail_out[i] --> generator.hail_in[i];
         }
 
 }

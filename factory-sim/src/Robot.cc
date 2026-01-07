@@ -66,13 +66,7 @@ void Robot::sendHail(){
     send(hail, "out_hail");
 }
 
-void Robot::sendHail(int index_){
-    EV_INFO << "Robot " << index_ << " sent hail" << endl;
 
-    cMessage *hail = new cMessage("hail");
-    hail->addPar("index") = index_;
-    send(hail, "out_hail");
-}
 
 void Robot::processMessage(cMessage *msg){
     if (msg->isSelfMessage()) { //end of production stage
@@ -92,10 +86,7 @@ void Robot::processMessage(cMessage *msg){
                 busy = false;
 
                 send(item, "outend");
-                if (strcmp(parentType, "factory_sim.PipelinedAssemblyLine") == 0)
-                    sendHail(0);
-                else
-                    sendHail();
+                sendHail();
             } else { //stage intermedio
                 //chiudo periodo busy di questo stage
                 simtime_t dur = simTime() - busyStart;
@@ -103,8 +94,7 @@ void Robot::processMessage(cMessage *msg){
                 busy = false;
 
                 send(item, "out_internal");
-                if (strcmp(parentType, "factory_sim.PipelinedAssemblyLine") == 0 && index == 0)
-                    sendHail();
+                sendHail();
             }
         }
         else { //difettoso
@@ -117,8 +107,7 @@ void Robot::processMessage(cMessage *msg){
             busy = false;
 
             send(item, "outend");
-            if (!(strcmp(parentType, "factory_sim.PipelinedAssemblyLine") == 0 && index != 0))
-                sendHail();
+            sendHail();
         }
     }
     else { //begin of production stage
