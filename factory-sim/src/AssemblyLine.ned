@@ -30,17 +30,16 @@ module AssemblyLine
    	submodules:
    	    robot[N]: Robot;
    	connections allowunconnected:
-   	    in[0] --> robot[0].instart;
-   	    robot[0].outend --> out[0] if mode == "parallelized";
-   	    for i=1..N-1 {
+   	    in[0] --> robot[0].instart if mode != "parallelized";
+   	    robot[0].out_hail --> hail_out[0] if mode != "parallelized";
+   	    for i=0..N-1 {
+   	        robot[i].out_hail --> hail_out[i] if mode == "parallelized";
         	in[i] --> robot[i].instart if mode =="parallelized";
-            robot[i].outend --> out[i] if mode == "parallelized";
+            robot[i].outend --> out[i];
             robot[i].out_internal --> robot[i].in_internal if mode == "parallelized";
 		}
 		
 		for i=0..N-2 {
 			robot[i].out_internal --> robot[i+1].in_internal if mode != "parallelized";
 		}
-    	
-   		robot[N-1].outend --> out[0] if mode != "parallelized";
 }

@@ -1,8 +1,8 @@
 version 3
-run Pipelined-0-20251210-21:08:29-26378
+run Pipelined-0-20260107-11:59:13-12461
 attr configname Pipelined
-attr datetime 20251210-21:08:29
-attr datetimef 20251210-210829
+attr datetime 20260107-11:59:13
+attr datetimef 20260107-115913
 attr experiment Pipelined
 attr inifile omnetpp.ini
 attr iterationvars ""
@@ -10,7 +10,7 @@ attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network Factory
-attr processid 26378
+attr processid 12461
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -51,4 +51,10 @@ vector 6 Factory.receiver defectiveLifetime:vector ETV
 attr recordingmode vector
 attr source defectiveLifetime
 attr unit s
+0	2	0.506726010935	0.506726010935
+0	6	0.564256705111	0.057530694176
+1	8	1.191836691927	0.627579986816
+2	10	1.324389222078	0.132552530151
+3	12	1.455474369694	0.131085147616
+6	3	0.506726010935	0.506726010935
 
