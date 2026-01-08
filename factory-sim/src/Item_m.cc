@@ -1,5 +1,5 @@
 //
-// Generated file, do not edit! Created by opp_msgtool 6.2 from Item.msg.
+// Generated file, do not edit! Created by opp_msgtool 6.2 from src/Item.msg.
 //
 
 // Disable warnings about unused variables, empty switch stmts, etc:

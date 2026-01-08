@@ -36,6 +36,7 @@ class Robot : public cSimpleModule
     protected:
         virtual void initialize() override;
         virtual void handleMessage(cMessage *msg) override;
+        virtual void finish() override;
         std::vector<double> getBernoulliValues(cModule *factory);
         void sendHail();
         void sendHail(int index_);

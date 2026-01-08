@@ -31,8 +31,9 @@ module AssemblyLine
    	    robot[N]: Robot;
    	connections allowunconnected:
    	    in[0] --> robot[0].instart if mode != "parallelized";
+   	    robot[0].out_hail --> hail_out[0] if mode !="parallelized";
    	    for i=0..N-1 {
-   	        robot[i].out_hail --> hail_out[i];
+   	        robot[i].out_hail --> hail_out[i] if mode =="parallelized";
         	in[i] --> robot[i].instart if mode =="parallelized";
             robot[i].outend --> out[i];
             robot[i].out_internal --> robot[i].in_internal if mode == "parallelized";

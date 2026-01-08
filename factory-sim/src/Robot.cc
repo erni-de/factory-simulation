@@ -69,6 +69,12 @@ void Robot::sendHail(){
 
 
 void Robot::processMessage(cMessage *msg){
+
+    cModule *assemblyLine = getParentModule();
+    cModule *factory = assemblyLine->getParentModule();
+    const char* mode = factory->par("mode").stringValue();
+    EV_INFO << "Mode: " << mode << "!" <<  endl;
+
     if (msg->isSelfMessage()) { //end of production stage
         Item *item = check_and_cast<Item*>(msg);
         int counterValue = item->getCounter();
@@ -86,7 +92,8 @@ void Robot::processMessage(cMessage *msg){
                 busy = false;
 
                 send(item, "outend");
-                sendHail();
+                if (strcmp(mode, "parallelized") == 0)
+                    sendHail();
             } else { //stage intermedio
                 //chiudo periodo busy di questo stage
                 simtime_t dur = simTime() - busyStart;
@@ -94,7 +101,10 @@ void Robot::processMessage(cMessage *msg){
                 busy = false;
 
                 send(item, "out_internal");
-                sendHail();
+                if (strcmp(mode, "pipelined") == 0 && index == 0)
+                {
+                    sendHail();
+                }
             }
         }
         else { //difettoso
@@ -107,7 +117,11 @@ void Robot::processMessage(cMessage *msg){
             busy = false;
 
             send(item, "outend");
-            sendHail();
+            if (strcmp(mode, "parallelized") == 0 ||
+                (strcmp(mode, "pipelined") == 0 && index == 0))
+            {
+                sendHail();
+            }
         }
     }
     else { //begin of production stage
@@ -133,6 +147,18 @@ std::vector<double> Robot::getBernoulliValues(cModule *factory){ //parses p (fac
         pVec.push_back(std::stod(i));
     }
     return pVec;
+}
+
+void Robot::finish(){
+    if(busy){
+        simtime_t dur = simTime() - busyStart;
+        emit(busyPeriodSignal, dur);
+        busy = false;
+    }
+    while(!msgQueue.isEmpty()){
+        cMessage* msg = (cMessage *)msgQueue.pop();
+        delete msg;
+    }
 }
 
 

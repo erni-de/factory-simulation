@@ -1,5 +1,5 @@
 //
-// Generated file, do not edit! Created by opp_msgtool 6.2 from Item.msg.
+// Generated file, do not edit! Created by opp_msgtool 6.2 from src/Item.msg.
 //
 
 #ifndef __ITEM_M_H
@@ -18,7 +18,7 @@
 
 class Item;
 /**
- * Class generated from <tt>Item.msg:19</tt> by opp_msgtool.
+ * Class generated from <tt>src/Item.msg:19</tt> by opp_msgtool.
  * <pre>
  * //
  * // TODO generated message class
