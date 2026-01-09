@@ -8,7 +8,7 @@
 #include <fstream>
 #include "ItemReceiver.h"
 #include "Item_m.h"
-
+#include <iomanip>
 
 Define_Module(ItemReceiver);
 
@@ -32,6 +32,8 @@ void ItemReceiver::initialize(){
 
 
     csvFile.open("output.csv", std::ios::out);
+    csvFile << std::setprecision(15) << std::fixed;
+
     if (!csvFile.is_open()) {
         EV_INFO << "Error opening CSV file!\n";
     } else {

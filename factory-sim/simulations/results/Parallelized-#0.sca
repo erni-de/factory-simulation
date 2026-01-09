@@ -1,8 +1,8 @@
 version 3
-run Parallelized-0-20260109-15:02:56-12728
+run Parallelized-0-20260109-16:12:58-17969
 attr configname Parallelized
-attr datetime 20260109-15:02:56
-attr datetimef 20260109-150256
+attr datetime 20260109-16:12:58
+attr datetimef 20260109-161258
 attr experiment Parallelized
 attr inifile omnetpp.ini
 attr iterationvars ""
@@ -10,7 +10,7 @@ attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network Factory
-attr processid 12728
+attr processid 17969
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -24,38 +24,38 @@ config **.p "\"0.78 0.9 0.98 0.1\""
 config network Factory
 
 par Factory.assemblyLine.robot[0] typename "\"factory_sim.Robot\""
-scalar Factory.assemblyLine.robot[0] busyPeriod:mean 0.50008959682637
+scalar Factory.assemblyLine.robot[0] busyPeriod:mean 0.49978896840996
 attr recordingmode mean
 attr source busyPeriod
 attr unit s
-scalar Factory.assemblyLine.robot[0] busyPeriod:sum 54492.763007782
+scalar Factory.assemblyLine.robot[0] busyPeriod:sum 155301.4253099
 attr recordingmode sum
 attr source busyPeriod
 attr unit s
 par Factory.assemblyLine.robot[1] typename "\"factory_sim.Robot\""
-scalar Factory.assemblyLine.robot[1] busyPeriod:mean 0.49851580832295
+scalar Factory.assemblyLine.robot[1] busyPeriod:mean 0.49948034358626
 attr recordingmode mean
 attr source busyPeriod
 attr unit s
-scalar Factory.assemblyLine.robot[1] busyPeriod:sum 54492.763007782
+scalar Factory.assemblyLine.robot[1] busyPeriod:sum 155301.4253099
 attr recordingmode sum
 attr source busyPeriod
 attr unit s
 par Factory.assemblyLine.robot[2] typename "\"factory_sim.Robot\""
-scalar Factory.assemblyLine.robot[2] busyPeriod:mean 0.50011713479976
+scalar Factory.assemblyLine.robot[2] busyPeriod:mean 0.50001746764212
 attr recordingmode mean
 attr source busyPeriod
 attr unit s
-scalar Factory.assemblyLine.robot[2] busyPeriod:sum 54492.763007782
+scalar Factory.assemblyLine.robot[2] busyPeriod:sum 155301.4253099
 attr recordingmode sum
 attr source busyPeriod
 attr unit s
 par Factory.assemblyLine.robot[3] typename "\"factory_sim.Robot\""
-scalar Factory.assemblyLine.robot[3] busyPeriod:mean 0.50070993565971
+scalar Factory.assemblyLine.robot[3] busyPeriod:mean 0.50056865530991
 attr recordingmode mean
 attr source busyPeriod
 attr unit s
-scalar Factory.assemblyLine.robot[3] busyPeriod:sum 54492.763007782
+scalar Factory.assemblyLine.robot[3] busyPeriod:sum 155301.4253099
 attr recordingmode sum
 attr source busyPeriod
 attr unit s
@@ -67,25 +67,25 @@ par Factory.generator N 4
 par Factory.receiver typename "\"factory_sim.ItemReceiver\""
 par Factory.receiver N 4
 statistic Factory.receiver "Stages Passed"
-field count 137367
-field mean 2.2439450523051
-field stddev 1.3378061402795
+field count 391932
+field mean 2.2395441045896
+field stddev 1.3403827591958
 field min 0
 field max 4
-field sum 308244
-field sqrsum 937530
+field sum 877749
+field sqrsum 2669911
 bin	-inf	0
-bin	0	29982
-bin	1	10753
-bin	2	1962
-bin	3	85113
-bin	4	9557
+bin	0	86219
+bin	1	30534
+bin	2	5510
+bin	3	242481
+bin	4	27188
 bin	5	0
-scalar Factory.receiver defectiveLifetime:mean 1.5558491490092
+scalar Factory.receiver defectiveLifetime:mean 1.5540013770722
 attr recordingmode mean
 attr source defectiveLifetime
 attr unit s
-scalar Factory.receiver completedItem:count 137367
+scalar Factory.receiver completedItem:count 391932
 attr "" ""
 attr recordingmode count
 attr source completedItem
@@ -93,15 +93,15 @@ scalar Factory.receiver itemWaitingTime:mean 0
 attr recordingmode mean
 attr source itemWaitingTime
 attr unit s
-scalar Factory.receiver defectiveItem:count 127810
+scalar Factory.receiver defectiveItem:count 364744
 attr "" ""
 attr recordingmode count
 attr source defectiveItem
-scalar Factory.receiver goodItem:count 9557
+scalar Factory.receiver goodItem:count 27188
 attr "" ""
 attr recordingmode count
 attr source goodItem
-scalar Factory.receiver itemResponseTime:mean 1.9998869043969
+scalar Factory.receiver itemResponseTime:mean 2.0004907473167
 attr recordingmode mean
 attr source itemResponseTime
 attr unit s
