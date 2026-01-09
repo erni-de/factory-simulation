@@ -1,8 +1,8 @@
 version 3
-run Pipelined-0-20260109-14:36:50-7929
+run Pipelined-0-20260109-18:39:06-27792
 attr configname Pipelined
-attr datetime 20260109-14:36:50
-attr datetimef 20260109-143650
+attr datetime 20260109-18:39:06
+attr datetimef 20260109-183906
 attr experiment Pipelined
 attr inifile omnetpp.ini
 attr iterationvars ""
@@ -10,52 +10,52 @@ attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network Factory
-attr processid 7929
+attr processid 27792
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
-attr seedset 125
+attr seedset 134
 config **.mode "\"pipelined\""
 config cpu-time-limit 200s
-config seed-set 125
+config seed-set 134
 config **.N 4
-config **.p "\"0.78 0.9 0.98 0.1\""
+config **.p 0.9
 config network Factory
 
 par Factory.assemblyLine.robot[0] typename "\"factory_sim.Robot\""
-scalar Factory.assemblyLine.robot[0] busyPeriod:mean 0.50113498593146
+scalar Factory.assemblyLine.robot[0] busyPeriod:mean 0.49907105680547
 attr recordingmode mean
 attr source busyPeriod
 attr unit s
-scalar Factory.assemblyLine.robot[0] busyPeriod:sum 9097.1033996139
+scalar Factory.assemblyLine.robot[0] busyPeriod:sum 15897.409443481
 attr recordingmode sum
 attr source busyPeriod
 attr unit s
 par Factory.assemblyLine.robot[1] typename "\"factory_sim.Robot\""
-scalar Factory.assemblyLine.robot[1] busyPeriod:mean 0.49831474627087
+scalar Factory.assemblyLine.robot[1] busyPeriod:mean 0.49825796604777
 attr recordingmode mean
 attr source busyPeriod
 attr unit s
-scalar Factory.assemblyLine.robot[1] busyPeriod:sum 7053.6452334641
+scalar Factory.assemblyLine.robot[1] busyPeriod:sum 14294.522787945
 attr recordingmode sum
 attr source busyPeriod
 attr unit s
 par Factory.assemblyLine.robot[2] typename "\"factory_sim.Robot\""
-scalar Factory.assemblyLine.robot[2] busyPeriod:mean 0.49650110423812
+scalar Factory.assemblyLine.robot[2] busyPeriod:mean 0.49624319362404
 attr recordingmode mean
 attr source busyPeriod
 attr unit s
-scalar Factory.assemblyLine.robot[2] busyPeriod:sum 6285.7039796545
+scalar Factory.assemblyLine.robot[2] busyPeriod:sum 12845.255066958
 attr recordingmode sum
 attr source busyPeriod
 attr unit s
 par Factory.assemblyLine.robot[3] typename "\"factory_sim.Robot\""
-scalar Factory.assemblyLine.robot[3] busyPeriod:mean 0.49742762622889
+scalar Factory.assemblyLine.robot[3] busyPeriod:mean 0.49608760782519
 attr recordingmode mean
 attr source busyPeriod
 attr unit s
-scalar Factory.assemblyLine.robot[3] busyPeriod:sum 6186.5073874087
+scalar Factory.assemblyLine.robot[3] busyPeriod:sum 11567.27475166
 attr recordingmode sum
 attr source busyPeriod
 attr unit s
@@ -67,46 +67,46 @@ par Factory.generator N 4
 par Factory.receiver typename "\"factory_sim.ItemReceiver\""
 par Factory.receiver N 4
 statistic Factory.receiver "Stages Passed"
-field count 18147
-field mean 2.2310574750647
-field stddev 1.34166904629
+field count 31847
+field mean 3.1056928439099
+field stddev 1.4056193677262
 field min 0
 field max 4
-field sum 40487
-field sqrsum 122993
+field sum 98907
+field sqrsum 370095
 bin	-inf	0
-bin	0	3996
-bin	1	1492
-bin	2	222
-bin	3	11197
-bin	4	1240
+bin	0	3164
+bin	1	2802
+bin	2	2565
+bin	3	2289
+bin	4	21027
 bin	5	0
-scalar Factory.receiver defectiveLifetime:mean 2.4887432355101
+scalar Factory.receiver defectiveLifetime:mean 2.7532831017768
 attr recordingmode mean
 attr source defectiveLifetime
 attr unit s
-scalar Factory.receiver completedItem:count 18147
+scalar Factory.receiver completedItem:count 31847
 attr "" ""
 attr recordingmode count
 attr source completedItem
-scalar Factory.receiver itemWaitingTime:mean 1.3354247089984
+scalar Factory.receiver itemWaitingTime:mean 2.7777198838943
 attr recordingmode mean
 attr source itemWaitingTime
 attr unit s
-scalar Factory.receiver defectiveItem:count 16907
+scalar Factory.receiver defectiveItem:count 10820
 attr "" ""
 attr recordingmode count
 attr source defectiveItem
-scalar Factory.receiver goodItem:count 1240
+scalar Factory.receiver goodItem:count 21027
 attr "" ""
 attr recordingmode count
 attr source goodItem
-scalar Factory.receiver itemResponseTime:mean 3.3313106403905
+scalar Factory.receiver itemResponseTime:mean 4.7643183612595
 attr recordingmode mean
 attr source itemResponseTime
 attr unit s
 par Factory typename "\"factory_sim.simulations.Factory\""
 par Factory N 4
-par Factory p "\"0.78 0.9 0.98 0.1\""
+par Factory p 0.9
 par Factory mode "\"pipelined\""
 

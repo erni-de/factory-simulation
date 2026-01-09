@@ -24,8 +24,8 @@ class Robot : public cSimpleModule
     private:
         int index;
         int N;
-        std::vector<double> p;
-        const char *parentType;
+        double p;
+        const char *mode;
         bool busy;
         cQueue msgQueue;
 
@@ -37,7 +37,6 @@ class Robot : public cSimpleModule
         virtual void initialize() override;
         virtual void handleMessage(cMessage *msg) override;
         virtual void finish() override;
-        std::vector<double> getBernoulliValues(cModule *factory);
         void sendHail();
         void sendHail(int index_);
         void processMessage(cMessage *msg);

@@ -26,7 +26,7 @@ network Factory
 {
     parameters:
         int N = default(0);
-        string p = default("");
+        double p = default(0);
         string mode = default("parallelized");
         @display("bgb=367,332");
     submodules:

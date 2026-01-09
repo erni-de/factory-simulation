@@ -17,11 +17,11 @@ Define_Module(Robot);
 void Robot::initialize(){
     index = getIndex();
     cModule *assemblyLine = getParentModule();
-    parentType = assemblyLine->getNedTypeName();
     cModule *factory = assemblyLine->getParentModule();
-    EV_INFO << "Parent module type: " << parentType << endl;
+    mode = factory->par("mode").stringValue();
+    EV_INFO << "Mode: " << mode << "!" <<  endl;
     N = factory->par("N");
-    p = getBernoulliValues(factory);
+    p = factory->par("p");
     busy = false;
 
     //registro i segnali
@@ -72,13 +72,11 @@ void Robot::processMessage(cMessage *msg){
 
     cModule *assemblyLine = getParentModule();
     cModule *factory = assemblyLine->getParentModule();
-    const char* mode = factory->par("mode").stringValue();
-    EV_INFO << "Mode: " << mode << "!" <<  endl;
 
     if (msg->isSelfMessage()) { //end of production stage
         Item *item = check_and_cast<Item*>(msg);
         int counterValue = item->getCounter();
-        int defect = bernoulli(p[counterValue]);
+        int defect = bernoulli(p);
 
         if (defect == 1) { //nessun difetto
             item->setCounter(item->getCounter() + 1);
@@ -140,14 +138,7 @@ void Robot::processMessage(cMessage *msg){
     }
 }
 
-std::vector<double> Robot::getBernoulliValues(cModule *factory){ //parses p (factory parameters) that is a string into a vector of doubles
-    std::vector<std::string> pStr = cStringTokenizer(factory->par("p")).asVector();
-    std::vector<double> pVec;
-    for (auto i : pStr) {
-        pVec.push_back(std::stod(i));
-    }
-    return pVec;
-}
+
 
 void Robot::finish(){
     if(busy){
