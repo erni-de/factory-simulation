@@ -70,9 +70,6 @@ void Robot::sendHail(){
 
 void Robot::processMessage(cMessage *msg){
 
-    cModule *assemblyLine = getParentModule();
-    cModule *factory = assemblyLine->getParentModule();
-
     if (msg->isSelfMessage()) { //end of production stage
         Item *item = check_and_cast<Item*>(msg);
         int counterValue = item->getCounter();
@@ -90,7 +87,7 @@ void Robot::processMessage(cMessage *msg){
                 busy = false;
 
                 send(item, "outend");
-                if (strcmp(mode, "parallelized") == 0)
+                if (strcmp(mode, "parallelized") == 0 || (strcmp(mode, "pipelined") == 0 && index == 0))
                     sendHail();
             } else { //stage intermedio
                 //chiudo periodo busy di questo stage
@@ -125,8 +122,8 @@ void Robot::processMessage(cMessage *msg){
     else { //begin of production stage
         Item *item = check_and_cast<Item*>(msg);
 
-        simtime_t w = simTime() - item->getTimestamp();
-        double newTotalW = item->getTotalWaitingTime() + w.dbl();
+        simtime_t w = simTime() - item->getTimestamp(); //wainting time in queue
+        double newTotalW = item->getTotalWaitingTime() + w.dbl(); //tottal wainting for a specific item
         item->setTotalWaitingTime(newTotalW);
 
         if (item->getCounter() == 0) {

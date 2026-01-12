@@ -18,6 +18,11 @@ using namespace omnetpp;
 class ItemReceiver : public cSimpleModule
 {
 protected:
+
+    int N;
+    double p;
+    const char *mode;
+
     virtual void initialize() override;
     virtual void handleMessage(cMessage *) override;
     virtual void finish() override;

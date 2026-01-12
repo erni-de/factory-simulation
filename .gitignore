@@ -5,3 +5,10 @@ out/
 *.exe
 *.oppfeaturestate
 *.lck
+results/
+*.csv
+*.sca
+*.vec
+*.vci
+siulation/
+*.csv

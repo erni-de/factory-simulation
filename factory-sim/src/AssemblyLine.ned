@@ -40,6 +40,8 @@ module AssemblyLine
 		}
 		
 		for i=0..N-2 {
-			robot[i].out_internal --> robot[i+1].in_internal if mode != "parallelized";
+			robot[i].out_internal --> robot[i+1].in_internal if mode != "parallelized" && N > 2;
 		}
+		
+		robot[0].out_internal --> robot[1].in_internal if mode != "parallelized" && N == 2;
 }

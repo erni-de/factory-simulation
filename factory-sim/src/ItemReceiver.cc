@@ -16,6 +16,13 @@ std::ofstream csvFile;
 
 void ItemReceiver::initialize(){
 
+    cModule *factory = getParentModule();
+
+    mode = factory->par("mode").stringValue();
+    N = factory->par("N");
+    p = factory->par("p");
+
+
     //Registro i segnali per le statistiche
     responseTimeSignal   = registerSignal("itemResponseTime");
     goodItemSignal       = registerSignal("goodItem");
@@ -31,14 +38,14 @@ void ItemReceiver::initialize(){
 
 
 
-    csvFile.open("output.csv", std::ios::out);
+    csvFile.open("output.csv", std::ios::app);
     csvFile << std::setprecision(15) << std::fixed;
 
     if (!csvFile.is_open()) {
         EV_INFO << "Error opening CSV file!\n";
     } else {
         EV_INFO << "CSV file opened successfully.\n";
-        csvFile << "counter,discarded,gen_time,arrival_time,discard_time,prod_time\n";
+        csvFile << "counter,discarded,gen_time,arrival_time,discard_time,prod_time,mode,N,p\n";
     }
 }
 
@@ -70,7 +77,10 @@ void ItemReceiver::handleMessage(cMessage *msg){
             << item->getGenerationTime() << ","
             << item->getStartTime() << ","
             << item->getDiscardTime() << ","
-            << item->getProductionTime() << "\n";
+            << item->getProductionTime() << ","
+            << mode << ","
+            << N << ","
+            << p << "\n";
 
     //Dealloco non avrà più owner
     delete item;

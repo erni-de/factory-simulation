@@ -20,7 +20,6 @@ using namespace std;
 class Robot : public cSimpleModule
 {
 
-
     private:
         int index;
         int N;
