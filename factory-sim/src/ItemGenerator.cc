@@ -32,6 +32,8 @@ void ItemGenerator::handleMessage(cMessage *msg)
             send(item, "out",0);
 
     }
+
+    delete msg;
 }
 
 
@@ -53,4 +55,5 @@ void ItemGenerator::sendItems()
     }
 
 }
+
 
