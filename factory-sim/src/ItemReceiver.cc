@@ -38,14 +38,14 @@ void ItemReceiver::initialize(){
 
 
 
-    csvFile.open("output.csv", std::ios::app);
-    csvFile << std::setprecision(15) << std::fixed;
+    //csvFile.open("output.csv", std::ios::app);
+    //csvFile << std::setprecision(15) << std::fixed;
 
     if (!csvFile.is_open()) {
         EV_INFO << "Error opening CSV file!\n";
     } else {
         EV_INFO << "CSV file opened successfully.\n";
-        csvFile << "counter,discarded,gen_time,arrival_time,discard_time,prod_time,mode,N,p\n";
+        //csvFile << "counter,discarded,gen_time,arrival_time,discard_time,prod_time,mode,N,p\n";
     }
 }
 
@@ -72,15 +72,15 @@ void ItemReceiver::handleMessage(cMessage *msg){
     }
 
     EV_INFO << "Item arrived!";
-    csvFile << item->getCounter() << ","
-            << item->isDiscarded() << ","
-            << item->getGenerationTime() << ","
-            << item->getStartTime() << ","
-            << item->getDiscardTime() << ","
-            << item->getProductionTime() << ","
-            << mode << ","
-            << N << ","
-            << p << "\n";
+    //csvFile << item->getCounter() << ","
+     //       << item->isDiscarded() << ","
+       //     << item->getGenerationTime() << ","
+     //       << item->getStartTime() << ","
+    //        << item->getDiscardTime() << ","
+     //       << item->getProductionTime() << ","
+       //     << mode << ","
+        //    << N << ","
+         //   << p << "\n";
 
     //Dealloco non avrà più owner
     delete item;
@@ -89,10 +89,10 @@ void ItemReceiver::handleMessage(cMessage *msg){
 
 
 void ItemReceiver::finish() {
-    if (csvFile.is_open()) {
-        csvFile.close();
-        EV_INFO << "CSV file closed.\n";
-    }
+    //if (csvFile.is_open()) {
+    //    csvFile.close();
+    //    EV_INFO << "CSV file closed.\n";
+    //}
     recordStatistic(&frequency_histogram);
 }
 
