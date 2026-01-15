@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <analysis version="2">
     <inputs>
-        <input pattern="results/Pipelined-*.vec"/>
-        <input pattern="results/Pipelined-*.sca"/>
+        <input pattern="results_mptdi/*.vec"/>
+        <input pattern="results_mptdi/*.sca"/>
     </inputs>
     <charts/>
 </analysis>
